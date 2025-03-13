@@ -1,4 +1,18 @@
-# *VicaSplat*: A Single Run is All You Need for 3D Gaussian Splatting and Camera Estimation from Unposed Video Frames
+<h1 align=center font-weight:100> <strong><i>VicaSplat</i></strong>: A Single Run is All You Need for 3D Gaussian Splatting and Camera Estimation from Unposed Video Frames</h1>
+
+<h3 align="center">ArXiv 2025</h3>
+
+<h5 align="center">
+
+[![arXiv](https://img.shields.io/badge/ArXiv-2410.06756-b31b1b.svg?logo=arXiv)](https://arxiv.org/abs/xxxx.xxxxx)
+[![Project page](https://img.shields.io/badge/Project-Page-brightgreen)](https://lizhiqi49.github.io/VicaSplat/)
+
+</h5>
+
+
+<p align="center">
+  <img src="assets/teaser.jpg" width="100%">
+</p>
 
 Official implementation of **VicaSplat** - feed-forward 3D Gaussians reconstruction and camera pose estimation from unposed video frames in ~0.1s!
 
