@@ -1,4 +1,4 @@
-<h2 align=center font-weight:100> <strong><i>VicaSplat</i></strong>: A Single Run is All You Need for 3D Gaussian Splatting and Camera Estimation from Unposed Video Frames</h2>
+<h2 align=center font-weight:300> <strong><i>VicaSplat</i></strong>: A Single Run is All You Need for 3D Gaussian Splatting and Camera Estimation from Unposed Video Frames</h2>
 
 <h3 align="center">ArXiv 2025</h3>
 
