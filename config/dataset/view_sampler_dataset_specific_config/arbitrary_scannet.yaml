@@ -1,0 +1,5 @@
+defaults:
+  - base_view_sampler
+
+num_target_views: 100
+num_context_views: 2

@@ -1,0 +1,15 @@
+img_size: 256
+patch_size: 16
+enc_embed_dim: 1024
+enc_depth: 24
+enc_num_heads: 16
+dec_embed_dim: 768
+dec_depth: 12
+dec_num_heads: 12
+mlp_ratio: 4.0
+temporal_rope_theta: 30
+rope_dim_list: [32, 32]
+use_blocked_causal_attention: true
+use_framewise_modulation: true
+use_cross_neighbor_attention: true
+use_intrinsic_embedding: false

@@ -1,0 +1,32 @@
+defaults:
+  - backbone: vica
+
+name: vicasplat
+
+opacity_mapping:
+  initial: 0.0
+  final: 0.0
+  warm_up: 1
+
+predict_opacity: false
+
+gaussian_adapter:
+  gaussian_scale_min: 0.005
+  gaussian_scale_max: 0.04
+  sh_degree: 4
+  scale_act: softplus
+
+visualizer:
+  num_samples: 8
+  min_resolution: 256
+  export_ply: true
+
+apply_bounds_shim: true
+
+gs_center_head_type: dpt
+gs_param_head_type: dpt_gs
+
+pretrained_weights: ""
+predict_conf: false
+camera_type: dq
+

@@ -1,0 +1,4 @@
+camera:
+  weight: 0.1
+  use_dq_loss: true
+  camera_type: dq # qt

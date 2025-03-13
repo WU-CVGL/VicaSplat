@@ -1,0 +1,75 @@
+# @package _global_
+
+defaults:
+  - /dataset@_group_.re10k: re10k_video
+  - override /model/encoder: vicasplat
+  - override /model/encoder/backbone: vica
+  - override /loss: [mse, lpips, camera]
+
+wandb:
+  name: re10k_vatentsplat_2view
+  tags: [re10k, 256x256]
+
+
+dataset:
+  re10k:
+    # overfit_to_scene: 2645536c2312c35a
+    view_sampler:
+      warm_up_steps: 5_000
+      num_context_views: 4
+      num_target_views: 6
+
+model:
+  encoder:
+    gs_center_head_type: dpt
+    gs_param_head_type: dpt_gs
+    pretrained_weights: ./checkpoints/re10k_2view.ckpt
+    backbone:
+      use_intrinsic_embedding: true
+      temporal_rope_theta: 10
+
+train:
+  distiller: "" #'dust3r'
+  distill_only_steps: 0
+  distill_max_steps: 0
+  gradient_checkpointing: false
+  extended_visualization: true
+  sh_warmup_every_n_steps: -1
+  n_camera_opt_views: 0
+  new_param_keywords: [gaussian_param_head, intrinsic_encoder]
+  lr_cosine_annealing: true
+
+optimizer:
+  lr: 4e-5
+  warm_up_steps: 200
+  backbone_lr_multiplier: 0.25
+
+data_loader:
+  # Avoid having to spin up new processes to print out visualizations.
+  train:
+    num_workers: 8
+    persistent_workers: true
+    batch_size: 8
+    seed: 1234
+
+  test:
+    num_workers: 4
+    persistent_workers: false
+    batch_size: 1
+    seed: 2345
+  val:
+    num_workers: 1
+    persistent_workers: true
+    batch_size: 1
+    seed: 3456
+
+
+trainer:
+  max_steps: 20_000
+  val_check_interval: 500
+  # precision: bf16-mixed
+  gradient_clip_val: 0.5
+
+checkpointing:
+  every_n_train_steps: 5_000
+  save_weights_only: true
