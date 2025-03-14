@@ -172,7 +172,7 @@ class VicaSplat(Encoder[VicaSplatCfg]):
         input_video = context["image"].permute(0, 2, 1, 3, 4)
 
         gs_embeds, camera_embeds, global_embeds, interms = self.backbone(
-            input_video, context["intrinsics"]
+            input_video, context.get("intrinsics", None)
         )
 
         # predict camera pose
@@ -191,7 +191,11 @@ class VicaSplat(Encoder[VicaSplatCfg]):
             pred_extrinsics_4x4 = camera_matrix_from_qt_array(pred_extrins)
 
         pred_extrinsics_4x4 = torch.cat(
-            [context["extrinsics"][:, :1], pred_extrinsics_4x4], dim=1
+            # [context["extrinsics"][:, :1], pred_extrinsics_4x4], dim=1
+            [
+                torch.eye(4, device=device, dtype=pred_extrinsics_4x4.dtype)[None, None].repeat(B, 1, 1, 1),
+                pred_extrinsics_4x4
+            ], dim=1
         )
 
         # maybe predict camera intrinsics

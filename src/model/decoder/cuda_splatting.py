@@ -163,20 +163,23 @@ def render_cuda(
     sh_degree: Optional[int] = None,
 ) -> tuple[Float[Tensor, "batch 3 height width"], Float[Tensor, "batch height width"]]:
     assert use_sh or gaussian_sh_coefficients.shape[-1] == 1
+    shared_gaussians = gaussian_means.ndim == 2
+    def get(gaussian_feature, idx):
+        return gaussian_feature if shared_gaussians else gaussian_feature[idx]
 
-    # Make sure everything is in a range where numerical issues don't appear.
-    if scale_invariant:
-        scale = 1 / near
-        extrinsics = extrinsics.clone()
-        extrinsics[..., :3, 3] = extrinsics[..., :3, 3] * scale[:, None]
-        gaussian_covariances = gaussian_covariances * (scale[:, None, None, None] ** 2)
-        gaussian_means = gaussian_means * scale[:, None, None]
-        near = near * scale
-        far = far * scale
+    # # Make sure everything is in a range where numerical issues don't appear.
+    # if scale_invariant:
+    #     scale = 1 / near
+    #     extrinsics = extrinsics.clone()
+    #     extrinsics[..., :3, 3] = extrinsics[..., :3, 3] * scale[:, None]
+    #     gaussian_covariances = gaussian_covariances * (scale[:, None, None, None] ** 2)
+    #     gaussian_means = gaussian_means * scale[:, None, None]
+    #     near = near * scale
+    #     far = far * scale
 
-    _, _, _, n = gaussian_sh_coefficients.shape
+    n = gaussian_sh_coefficients.shape[-1]
     degree = sh_degree or isqrt(n) - 1
-    shs = rearrange(gaussian_sh_coefficients, "b g xyz n -> b g n xyz").contiguous()
+    shs = rearrange(gaussian_sh_coefficients, "... xyz n -> ... n xyz").contiguous()
 
     b, _, _ = extrinsics.shape
     h, w = image_shape
@@ -221,12 +224,12 @@ def render_cuda(
         row, col = torch.triu_indices(3, 3)
 
         image, radii, depth, opacity, n_touched = rasterizer(
-            means3D=gaussian_means[i],
+            means3D=get(gaussian_means, i),
             means2D=mean_gradients,
-            shs=shs[i] if use_sh else None,
-            colors_precomp=None if use_sh else shs[i, :, 0, :],
-            opacities=gaussian_opacities[i, ..., None],
-            cov3D_precomp=gaussian_covariances[i, :, row, col],
+            shs=get(shs, i) if use_sh else None,
+            colors_precomp=None if use_sh else get(shs, i)[:, 0, :],
+            opacities=get(gaussian_opacities, i)[..., None],
+            cov3D_precomp=get(gaussian_covariances, i)[:, row, col],
             theta=cam_rot_delta[i] if cam_rot_delta is not None else None,
             rho=cam_trans_delta[i] if cam_trans_delta is not None else None,
         )
