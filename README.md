@@ -6,6 +6,7 @@
 
 [![arXiv](https://img.shields.io/badge/ArXiv-2503.10286-b31b1b.svg?logo=arXiv)](https://arxiv.org/abs/2503.10286)
 [![Project page](https://img.shields.io/badge/Project-Page-brightgreen)](https://lizhiqi49.github.io/VicaSplat/)
+[![HuggingFace](https://img.shields.io/badge/HuggingFace-Model-blue?style=flat&logo=HuggingFace)](https://huggingface.co/lzq49/VicaSplat)
 
 </h5>
 
