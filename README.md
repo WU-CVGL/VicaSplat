@@ -50,9 +50,9 @@ Our models are hosted on [Hugging Face](https://huggingface.co/lzq49/VicaSplat) 
 |         [re10k_8view.ckpt]( https://huggingface.co/lzq49/VicaSplat/resolve/main/re10k_8view.ckpt)                      |        256x256       |     re10k     |
 |         [re10k_2view.ckpt]( https://huggingface.co/lzq49/VicaSplat/resolve/main/re10k_2view.ckpt )                     |        256x256       |     re10k     |
 |         [acid_2view.ckpt]( https://huggingface.co/lzq49/VicaSplat/resolve/main/acid_2view.ckpt )                       |        256x256       |     acid      |   
-<!-- |         [re10k_8view_no_intrin.ckpt]( https://huggingface.co/lzq49/VicaSplat/resolve/main/re10k_8view_no_intrin.ckpt)  |        256x256       |     re10k     |
+|         [re10k_8view_no_intrin.ckpt]( https://huggingface.co/lzq49/VicaSplat/resolve/main/re10k_8view_no_intrin.ckpt)  |        256x256       |     re10k     |
 |         [re10k_2view_no_intrin.ckpt]( https://huggingface.co/lzq49/VicaSplat/resolve/main/re10k_2view_no_intrin.ckpt ) |        256x256       |     re10k     |
-|         [acid_2view_no_intrin.ckpt]( https://huggingface.co/lzq49/VicaSplat/resolve/main/acid_2view_no_intrin.ckpt )   |        256x256       |     acid      |    -->
+|         [acid_2view_no_intrin.ckpt]( https://huggingface.co/lzq49/VicaSplat/resolve/main/acid_2view_no_intrin.ckpt )   |        256x256       |     acid      |   
 
 We assume the downloaded weights are located in the `pretrained_weights` directory.
 
