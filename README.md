@@ -67,6 +67,37 @@ Our model is mainly trained on [RealEstate10K](https://google.github.io/realesta
 Our model is also evaluated on [ScanNet](http://www.scan-net.org). Please refer to its official sources, agree to their license, and download it.
 
 ## Running the Code
+### Quick Demo
+We have built a gradio demo, try it using the following command:
+```bash
+# unknown intrinsics
+python demo.py +experiment=re10k_8view \
+  model.encoder.pretrained_weights=pretrained_weights/re10k_8view_no_intrin.ckpt \
+  model.encoder.backbone.use_intrinsic_embedding=false \
+  hydra.run.dir=output_dir
+
+# known intrinsics
+python demo.py +experiment=re10k_8view \
+  model.encoder.pretrained_weights=pretrained_weights/re10k_8view.ckpt \
+  hydra.run.dir=output_dir
+```
+By uploading a directory containing video frames and running the demo, the following stuffs would be exported in the `output_dir`.
+* the predicted Gaussians (.ply);
+* the rendered videos along predicted camera trajectory (.mp4);
+* the predicted camera poses (.json);
+* the input images (context)
+
+Then you can use our 3D Gaussian viewer to visualize the predicted Gaussians and cameras following next section. 
+
+### Visulization
+The novel view synthesis evaluation procedure defaultly export the 3DGS (.ply file), predicted camera poses (transforms.json) as well as both input and rendered images. 
+For visulization of predicted 3D Gaussians and camera poses, you can run the following command:
+```bash
+python src/visulization/viewer.py --ply path/to/ply --meta_file path/to/transform/json
+```
+Then just click the printed link in the command line.
+
+
 ### Training
 First download the [MASt3R](https://download.europe.naverlabs.com/ComputerVision/MASt3R/MASt3R_ViTLarge_BaseDecoder_512_catmlpdpt_metric.pth) pretrained model and put it in the `./pretrained_weights` directory.
 
@@ -112,14 +143,6 @@ To evaluate the pose estimation performance, you can run the following command:
 # RealEstate10K-8view
 python -m src.eval_pose +experiment=re10k_8view +evaluation=eval_pose checkpointing.load=./pretrained_weights/re10k_8view.ckpt dataset/view_sampler@dataset.re10k.view_sampler=evaluation dataset.re10k.view_sampler.index_path=assets/evaluation_index_re10k_8view_sub.json
 ```
-
-### Visulization
-The novel view synthesis evaluation procedure defaultly export the 3DGS (.ply file), predicted camera poses (transforms.json) as well as both input and rendered images. 
-For visulization of predicted 3D Gaussians and camera poses, you can run the following command:
-```bash
-python src/visulization/viewer.py --ply path/to/ply --meta_file path/to/transform/json
-```
-Then just click the printed link in the command line.
 
 ## Acknowledgements
 This project is developed with several fantastic repos: [pixelSplat](https://github.com/dcharatan/pixelsplat), [NoPoSplat](https://github.com/cvg/NoPoSplat), [DUSt3R](https://github.com/naver/dust3r) and [MASt3R](https://github.com/naver/mast3r). We thank the original authors for their excellent work.

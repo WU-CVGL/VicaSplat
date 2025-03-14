@@ -25,6 +25,7 @@ svg.py
 scikit-video
 opencv-python
 
+gradio
 gsplat
 viser
 nerfview
