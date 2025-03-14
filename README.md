@@ -71,7 +71,7 @@ First download the [MASt3R](https://download.europe.naverlabs.com/ComputerVision
 
 #### Point Distillation
 ```bash
-# 8 GPUs, with each batch size = 16. Remove the last two arguments if you don't want to use wandb for logging
+# 8 GPUs, with each batch size = 24
 python -m src.main +experiment=distill wandb.name=distill
 ```
 
@@ -82,6 +82,8 @@ export distilled_model_path=""
 python -m src.main +experiment=re10k_2view wandb.name=re10k_2view model.encoder.pretrained_weights=$distilled_model_path
 # acid
 python -m src.main +experiment=acid_2view wandb.name=acid_2view model.encoder.pretrained_weights=$distilled_model_path
+
+## If you do not want the model conditioned on intrinsics, add the option: model.encoder.backbone.use_intrinsic_embedding=false
 ```
 
 #### 4-view Training

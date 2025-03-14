@@ -23,7 +23,7 @@ model:
   encoder:
     gs_center_head_type: dpt
     gs_param_head_type: dpt_gs
-    pretrained_weights: ./checkpoints/re10k_2view.ckpt
+    pretrained_weights: checkpoints/re10k_2view.ckpt
     backbone:
       use_intrinsic_embedding: true
       temporal_rope_theta: 10

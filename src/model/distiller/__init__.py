@@ -12,9 +12,9 @@ def get_distiller(name):
     distiller = distiller.eval()
 
     if name == 'dust3r':
-        weight_path = './checkpoints/DUSt3R_ViTLarge_BaseDecoder_512_dpt.pth'
+        weight_path = './pretrained_weights/DUSt3R_ViTLarge_BaseDecoder_512_dpt.pth'
     elif name == 'mast3r':
-        weight_path = './checkpoints/MASt3R_ViTLarge_BaseDecoder_512_catmlpdpt_metric.pth'
+        weight_path = './pretrained_weights/MASt3R_ViTLarge_BaseDecoder_512_catmlpdpt_metric.pth'
     else:
         raise NotImplementedError(f"unexpected {name=}")
     ckpt_weights = torch.load(weight_path, map_location='cpu')['model']

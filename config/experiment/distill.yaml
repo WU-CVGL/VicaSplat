@@ -20,7 +20,7 @@ model:
   encoder:
     gs_center_head_type: dpt
     gs_param_head_type: dpt_gs
-    pretrained_weights: checkpoints/MASt3R_ViTLarge_BaseDecoder_512_catmlpdpt_metric.pth
+    pretrained_weights: pretrained_weights/MASt3R_ViTLarge_BaseDecoder_512_catmlpdpt_metric.pth
     predict_conf: true
     backbone:
       use_blocked_causal_attention: true
