@@ -12,7 +12,7 @@ colorama
 scikit-image
 colorspacious
 matplotlib
-moviepy
+moviepy==1.0.3 # moviepy.editor removed in the latest version
 imageio
 git+https://github.com/rmurai0610/diff-gaussian-rasterization-w-pose.git
 timm
@@ -29,3 +29,9 @@ gradio
 gsplat
 viser
 nerfview
+
+"git+https://github.com/facebookresearch/pytorch3d.git" # pytorch3d install
+pypose
+pyquaternion
+diffusers
+evo
